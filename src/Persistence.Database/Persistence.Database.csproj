@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20201119135652_AddTableIdentyUser.cs" />
+    <Compile Remove="Migrations\20201119135652_AddTableIdentyUser.Designer.cs" />
+    <Compile Remove="Migrations\20201119140841_AddTableIdentTables.cs" />
+    <Compile Remove="Migrations\20201119140841_AddTableIdentTables.Designer.cs" />
+    <Compile Remove="Migrations\20201119141505_AddTablesIdent.cs" />
+    <Compile Remove="Migrations\20201119141505_AddTablesIdent.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj" />
+  </ItemGroup>
+
+</Project>
