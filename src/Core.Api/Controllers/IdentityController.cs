@@ -53,7 +53,7 @@ namespace Core.Api.Controllers
 
             if (!result.Succeeded)
             {
-                throw new Exception("Fallo al crerar usuario.");
+                return BadRequest("No se pudo crear el usuario.");
             }
             return Ok();
 
@@ -64,18 +64,17 @@ namespace Core.Api.Controllers
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
 
-            var check = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
-
-            if (check.Succeeded)
+            if(user != null)
             {
-                return Ok(
-                  await GenerateToken(user)
-                );
+                var check = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
+                if (check.Succeeded)
+                {
+                    return Ok(
+                      await GenerateToken(user)
+                    );
+                }
             }
-            else
-            {
-                return BadRequest("Acceso invalido !!!");
-            }
+            return BadRequest("Acceso no valido al sistema !!!"); 
         }
 
         private async Task<string> GenerateToken(ApplicationUser user)

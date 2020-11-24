@@ -36,6 +36,17 @@ namespace Core.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            //habilitar politicas de acceso
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin", builder =>
+                builder.AllowAnyHeader()
+                       .AllowAnyMethod()
+                       .AllowAnyOrigin()
+                       );
+            });
+
+
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection"))
                 );
@@ -62,6 +73,8 @@ namespace Core.Api
             services.AddTransient<IClientService, ClientService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IOrderService, OrderService>();
+            
+            services.AddTransient<IUserService, UserService>();
 
             services.AddAutoMapper(typeof(Startup));
 
@@ -99,6 +112,8 @@ namespace Core.Api
                 app.UseDeveloperExceptionPage();
             }
 
+            //usuamos la politica
+            app.UseCors("AllowSpecificOrigin");
             app.UseRouting();
 
             app.UseAuthentication();
