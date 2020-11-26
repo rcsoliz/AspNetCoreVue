@@ -58,9 +58,18 @@ namespace Service
 
         public async Task<DataCollection<ClientDto>> GetAllAsync(int page, int take)
         {
-            
-            return  _mapper.Map<DataCollection<ClientDto>>(
-                await _context.Clients.OrderByDescending(x => x.ClientId)
+
+            //return _mapper.Map<DataCollection<ClientDto>>(
+            //    await _context.Clients.OrderByDescending(x => x.ClientId)
+            //                          .AsQueryable()
+            //                          .PagedAsync(page, take)
+            //    );
+
+
+            return _mapper.Map<DataCollection<ClientDto>>(
+                await _context.Clients
+                      .Include(x => x.Country)
+                .OrderByDescending(x => x.ClientId)
                                       .AsQueryable()
                                       .PagedAsync(page, take)
                 );

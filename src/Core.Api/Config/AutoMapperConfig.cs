@@ -32,10 +32,13 @@ namespace Core.Api.Config
                     .ForMember(
                         dest => dest.FullName,
                         opts => opts.MapFrom(src => src.LastName + ", " + src.FirstName)
-                    ).ForMember(
+                    )
+                    .ForMember(
                         dest => dest.Roles,
                         opts => opts.MapFrom(src => src.UserRoles.Select(y => y.Role.Name).ToList())
                     );
+
+            //CreateMap<ApplicationUser, ApplicationUserDto>();
             CreateMap<DataCollection<ApplicationUser>, DataCollection<ApplicationUserDto>>();
 
             //Create Order

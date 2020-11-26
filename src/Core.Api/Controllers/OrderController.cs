@@ -11,7 +11,7 @@ using Service.Comomns;
 
 namespace Core.Api.Controllers
 {
-    [Authorize( Roles = RoleHelper.Adm + ","  + RoleHelper.Seller)]
+    [Authorize]
     [ApiController]
     [Route("Orders")]
     public class OrderController : ControllerBase

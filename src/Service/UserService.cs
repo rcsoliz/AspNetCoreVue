@@ -6,7 +6,7 @@ using Service.Comomns;
 using Service.Extensions;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Model.Identity;
 
 namespace Service
 {
@@ -26,8 +26,7 @@ namespace Service
         }
 
         public async Task<DataCollection<ApplicationUserDto>> GetAll(int page, int take)
-        {
-
+        {    
             return _mapper.Map<DataCollection<ApplicationUserDto>>(
                 await _context.Users.OrderByDescending(x => x.FirstName)
                               .Include(x => x.UserRoles)

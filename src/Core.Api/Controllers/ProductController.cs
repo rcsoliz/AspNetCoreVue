@@ -11,7 +11,7 @@ using Service.Comomns;
 
 namespace Core.Api.Controllers
 {
-    [Authorize(Roles = RoleHelper.Adm)]
+    [Authorize]
     [ApiController]
     [Route("Products")]
     public class ProductController : ControllerBase

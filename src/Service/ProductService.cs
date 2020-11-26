@@ -54,20 +54,32 @@ namespace Service
 
         public async Task<DataCollection<ProductDto>> GetAllAsync(int page, int take)
         {
+            //return _mapper.Map<DataCollection<ProductDto>>(
+            //       await _context.Products.OrderByDescending(x => x.ProductId)
+            //                              .AsQueryable()
+            //                              .PagedAsync(page, take)
+            //      );
+
             return _mapper.Map<DataCollection<ProductDto>>(
-                   await _context.Products.OrderByDescending(x => x.ProductId)
-                                          .AsQueryable()
-                                          .PagedAsync(page, take)
-                  );
+                  await _context.Products
+                                .Include(x => x.Category)
+                                .OrderByDescending(x => x.ProductId)
+                                .AsQueryable()
+                                .PagedAsync(page, take)
+                 );
+
         }
 
         public async Task Update (int id, ProductUpdateDto model)
         {
             var entry = await _context.Products.SingleAsync(x => x.ProductId == id);
+            entry.ProductId = id;
             entry.Name = model.Name;
             entry.Description = model.Description;
             entry.Price = model.Price;
             entry.CategoryId = model.CategoryId;
+
+             _context.Update(entry);
 
             await _context.SaveChangesAsync();
         }

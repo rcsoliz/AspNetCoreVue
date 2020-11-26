@@ -35,6 +35,7 @@ namespace Core.Api.Controllers
         {
             return "Estoy en IdentityController";
         }
+
         //identity/register
         [HttpPost("register")]
         public async Task<IActionResult> Create(ApplicationUserRegisterDto model)
@@ -109,6 +110,26 @@ namespace Core.Api.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             var createdToken = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(createdToken);
+        }
+
+        [HttpPut]
+        private void preuba()
+        {
+            ////1.- traer el usuario
+            //var _user=_userManager.FindByIdAsync(id);
+            ////2. tiene el rol
+            //var _rolExiste = _userManager.IsInRoleAsync(_user, "Admin");
+            ////3.-si existe lo remuevo
+            //if (_rolExiste)
+            //{
+            //    _userManager.RemoveFromRoleAsync(_user, "Admin");
+            //}
+            //else
+            //{
+            //    _userManager.AddToRoleAsync(_user, "Admin");
+            //}
+
+
         }
 
     }

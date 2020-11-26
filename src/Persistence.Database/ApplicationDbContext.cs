@@ -1,19 +1,21 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Model;
 using Model.BaseModel;
 using Model.Identity;
 using Persistence.Database.Config;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Persistence.Database
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string, IdentityUserClaim<string>,
+                                        ApplicationUserRole, IdentityUserLogin<string>,
+                                        IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
         public DbSet<Country> Countries { get; set; }
         public DbSet<Category> Categories { get; set; }

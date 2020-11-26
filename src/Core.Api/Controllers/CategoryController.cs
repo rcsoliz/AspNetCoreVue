@@ -12,9 +12,9 @@ using Service.Comomns;
 namespace Core.Api.Controllers
 {
 
-    [Authorize(Roles = RoleHelper.Adm)]
+    [Authorize]
     [ApiController]
-    [Route("Categories")]
+    [Route("categories")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;

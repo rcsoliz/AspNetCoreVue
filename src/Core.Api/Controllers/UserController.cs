@@ -11,21 +11,20 @@ using Service.Comomns;
 
 namespace Core.Api.Controllers
 {
-   // [Authorize]
+    [Authorize(Roles =RoleHelper.Adm)]
     [Route("users")]
     public class UserController : ControllerBase
     {
-        private readonly IClientService _clientService;
-        public UserController(IClientService clientService)
+        private readonly IUserService _userService;
+        public UserController(IUserService userService)
         {
-            _clientService = clientService;
+            _userService = userService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<DataCollection<ClientDto>>> GetAll(int page, int take=20)
+        public async Task<ActionResult<DataCollection<ApplicationUserDto>>> GetAll(int page, int take)
         {
-            return Ok();
-            //return await _clientService.GetAllAsync(page, take);
+            return await _userService.GetAll(page, take);
         }
 
     }
